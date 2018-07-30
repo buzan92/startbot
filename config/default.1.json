@@ -1,0 +1,23 @@
+{
+  "app": {
+      "name": "startbot",
+      "telegramToken": "",
+      "destEmail": "",
+      "emailLogin": "",
+      "emailPassword": ""
+  },
+  "server": {
+      "port": 3000
+  },
+  "mongodb": {
+      "url": "mongodb://localhost:27017",
+      "opts": {
+          "auto_reconnect": true,
+          "auth": {
+            "user": "",
+            "password": ""
+          },
+          "dbName": "startbot"
+      }
+  }
+}
