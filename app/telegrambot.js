@@ -34,6 +34,10 @@ bot.on('message', async (msg) => {
   if (msg.text && msg.text === '/start') { //TODO: regular expression
     return;
   }
+  if (!msg.text || !msg.text.trim()) {
+    // bot.sendMessage(msg.chat.id, 'Укажите корректный ответ');
+    return;
+  }
   const { state, callbackData, questionIdx } = await getUserState(msg.chat.id, msg.from);
   switch (state) {
     case 'start':
@@ -49,13 +53,10 @@ bot.on('message', async (msg) => {
       } else {
         await updateQuiz(msg.chat.id, questions[questionIdx - 1], msg.text);
         const result = await finishQuiz(msg.chat.id);
+        await setUserState(msg.chat.id, 'start', '', 0);
         console.log('res', result);
         bot.sendMessage(msg.chat.id, c.finishMessage);
       }
-    break;
-
-    case 'finish':
-
     break;
     default:
       console.log('default');

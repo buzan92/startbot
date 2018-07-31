@@ -29,7 +29,7 @@ export const resetQuiz = async (chatid) => {
     .catch((err) => {
       throw new Error(`error while remove quiz document: ${err.message}`);
     });
-}
+};
 
 export const updateQuiz = async (chatid, question, answer) => {
   const questionObj = { question, answer };
@@ -45,9 +45,9 @@ export const updateQuiz = async (chatid, question, answer) => {
 export const finishQuiz = async (chatid) => {
   const user = await User.findOne({ chatid });
   const quiz = await Quiz.findOne({ chatid });
-  let content = `Пользователь ${user.username} (${user.firstname} ${user.lastname}) заполнил анкету\n\n`;
+  let content = `Пользователь ${user.username} (${user.firstname} ${user.lastname}) заполнил анкету<br><br>`;
   quiz.questions.forEach((question) => {
-    content += `${question.question}\n${question.answer}\n\n`;
+    content += `${question.question}<br>${question.answer}<br><br>`;
   });
   await sendMail(content);
 };
